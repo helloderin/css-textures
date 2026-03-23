@@ -1,0 +1,10 @@
+{
+  "name": "css-textures-monorepo",
+  "private": true,
+  "workspaces": ["packages/*", "apps/*"],
+  "description": "A collection of CSS textures",
+  "scripts": {
+    "build": "npm run build -w packages/css-textures",
+    "dev":   "npm run dev   -w apps/playground"
+  }
+}
