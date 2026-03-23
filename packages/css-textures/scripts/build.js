@@ -17,6 +17,7 @@ await build({
   format: "esm",
   outfile: join(root, "dist/index.js"),
   minify: true,
+  loader: { ".css": "text" },
 });
 console.log("✓  dist/index.js       ESM bundle");
 
@@ -26,6 +27,7 @@ await build({
   format: "cjs",
   outfile: join(root, "dist/index.cjs"),
   minify: true,
+  loader: { ".css": "text" },
 });
 console.log("✓  dist/index.cjs      CJS bundle");
 

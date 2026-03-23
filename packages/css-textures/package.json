@@ -1,6 +1,6 @@
 {
   "name": "css-textures",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A zero-dependency palette of CSS textures",
   "keywords": [
     "css",
@@ -17,10 +17,12 @@
   "type": "module",
   "main": "index.js",
   "module": "./dist/index.js",
+  "types": "./index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "types": "./index.d.ts"
     }
   },
   "files": [
