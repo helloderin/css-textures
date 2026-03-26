@@ -7,5 +7,6 @@ export const leather = createTexture({
   vars: {
     "--texture-scale": "Tile size in px (default: 200px)",
     "--texture-intensity": "Overlay opacity 0–1 (default: 0.6)",
+    "--texture-blend-mode": "Blend mode used to mix texture",
   },
 });

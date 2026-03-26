@@ -83,10 +83,11 @@ const { css, className } = leather;
 
 All textures expose two CSS custom properties you can override per-element:
 
-| Property              | Default | Description                  |
-| --------------------- | ------- | ---------------------------- |
-| `--texture-scale`     | varies  | Tile / repeat size           |
-| `--texture-intensity` | varies  | Opacity of the overlay layer |
+| Property               | Default | Description                  |
+| ---------------------- | ------- | ---------------------------- |
+| `--texture-scale`      | varies  | Tile / repeat size           |
+| `--texture-intensity`  | varies  | Opacity of the overlay layer |
+| `--texture-blend-mode` | varies  | Blend mode                   |
 
 ```css
 .my-card {
