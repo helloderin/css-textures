@@ -5,6 +5,7 @@
   "description": "A collection of CSS textures",
   "scripts": {
     "build": "npm run build -w packages/css-textures",
-    "dev":   "npm run dev   -w apps/playground"
+    "dev":   "npm run dev   -w apps/playground",
+    "test":  "npm run test  -w packages/css-textures"
   }
 }
