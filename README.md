@@ -23,6 +23,7 @@ Then:
 | --------------- | -------------------------------------------------- |
 | `npm run build` | Build the package to `packages/css-textures/dist/` |
 | `npm run dev`   | Start the playground                               |
+| `npm test`      | Run the test suite                                 |
 
 ## Package
 
