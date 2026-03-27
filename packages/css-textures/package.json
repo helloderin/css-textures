@@ -11,11 +11,19 @@
   ],
   "author": "helloderin",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/helloderin/css-textures.git"
+  },
+  "homepage": "https://github.com/helloderin/css-textures#readme",
+  "bugs": {
+    "url": "https://github.com/helloderin/css-textures/issues"
+  },
   "publishConfig": {
     "access": "public"
   },
   "type": "module",
-  "main": "index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./index.d.ts",
   "exports": {
@@ -26,17 +34,17 @@
     },
     "./react": {
       "types": "./react.d.ts"
-    }
+    },
+    "./css": "./dist/textures.css",
+    "./css/leather": "./dist/textures/leather.css"
   },
   "files": [
     "dist",
-    "src",
     "README.md",
     "react.d.ts"
   ],
   "scripts": {
-    "build": "node scripts/build.js",
-    "dev": "node scripts/build.js --watch"
+    "build": "node scripts/build.js"
   },
   "devDependencies": {
     "esbuild": "^0.20.2"
