@@ -1,0 +1,64 @@
+.swatchCard {
+  border: 0.5px solid rgba(31, 30, 29, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.18s;
+  cursor: pointer;
+  position:relative;
+  aspect-ratio: 1;
+}
+
+.swatchCard:hover {
+  transform: translateY(-3px);
+}
+
+.swatchCardSelected {
+  outline: 0.5px solid rgba(20, 20, 19, 0.2);
+  outline-offset: 3px;
+}
+
+.swatchCardSelected:hover {
+  transform: none;
+}
+
+.background {
+  height: 100%;
+  width: 100%;
+}
+
+.description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 9px 11px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.textureNameContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.textureName {
+  margin: 0;
+  color: rgba(20, 20, 19, 1);
+  text-transform: capitalize;
+  font-weight: 400;
+}
+
+.modifiedDot {
+  color: #3b82f6;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.textureClassName {
+  margin: 0;
+  margin-top: 1px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: rgba(61, 61, 58, 1);
+  font-weight: 200;
+}

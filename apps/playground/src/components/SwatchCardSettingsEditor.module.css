@@ -1,0 +1,237 @@
+.drawer {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.3s ease, opacity 0.2s ease;
+  overflow: hidden;
+}
+
+.drawer.drawerOpen {
+  grid-column: 1 / -1;
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.editorContainer {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1.1rem 1.25rem;
+  background: rgb(255, 255, 255);
+  border: 0.5px solid rgba(31, 30, 29, 0.15);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-grow: 1;
+}
+
+.titleContainer {
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.textureName {
+  text-transform: capitalize;
+}
+
+.modifiedDot {
+  color: #3b82f6;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 4px;
+}
+
+.fieldLabel {
+  font-size: 0.9rem;
+  white-space: nowrap;
+  min-width: 60px;
+}
+
+.colorChangeButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.colorChangeButton:hover {
+  border-color: #a0aec0;
+}
+
+.hiddenColorInput {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fieldResetButton {
+  background: none;
+  border: none;
+  padding: 0 2px;
+  font-size: 14px;
+  color: #a0aec0;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.fieldResetButton:hover {
+  color: #4a5568;
+}
+
+.fieldModifier {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  column-gap: 5px;
+}
+
+.fieldModifier input[type="range"] {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.fieldValue {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a202c;
+  text-align: right;
+  min-width: calc(3.5rem + 19px);
+}
+
+.rightColumn {
+  flex: 1;
+  flex-basis: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.allPreviews {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.previewContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: calc(252px - (2 * 1.25rem));
+}
+
+.previewLabel {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+}
+
+.backgroundPreview {
+  height: 160px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.textPreview {
+  height: 160px;
+  font-size: clamp(3rem, 6cqw, 10rem);
+  font-weight: 900;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  line-height: 1;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+}
+
+.snippetHeader {
+  margin-top: 1rem;
+  
+}
+
+.snippetBox {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: auto;
+  max-height: 160px;
+  width: 0;
+  min-width: 100%;
+}
+
+.snippet {
+  margin: 0;
+  padding: 14px 16px;
+  font-family: var(--mono, monospace);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #2d3748;
+  white-space: pre;
+  text-align: left;
+}
+
+.snippetActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.snippetOptions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  line-height: 1;
+  color: rgba(31, 30, 29, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.closeButton:hover {
+  color: #1a202c;
+  background: #f7fafc;
+}

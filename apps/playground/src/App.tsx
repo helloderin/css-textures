@@ -1,121 +1,115 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { leather } from "css-textures";
+import styles from "./App.module.css";
+import { SwatchCard } from "./components/SwatchCard";
+import { SwatchCardSettingsEditor } from "./components/SwatchCardSettingsEditor";
+import { GlobalSettingsEditor } from "./components/GlobalSettingsEditor";
+import { Fragment, useRef, useState } from "react";
+
+const textures = [leather];
+
+const DEFAULT_COLOR = "#a0856b";
+const DEFAULT_INTENSITY = 0.5;
+const DEFAULT_SCALE = 200;
+const DEFAULT_BLEND_MODE = "overlay";
+
+const DEFAULTS: SwatchSettings = {
+  color: DEFAULT_COLOR,
+  intensity: DEFAULT_INTENSITY,
+  scale: DEFAULT_SCALE,
+  blendMode: DEFAULT_BLEND_MODE,
+};
+
+export interface SwatchSettings {
+  color: string;
+  intensity: number;
+  scale: number;
+  blendMode: string;
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [globalSettings, setGlobalSettings] =
+    useState<SwatchSettings>(DEFAULTS);
+  const [selectedTextureId, setSelectedTextureId] = useState<string | null>(
+    null,
+  );
+  const [insertAfterIndex, setInsertAfterIndex] = useState<number | null>(null);
+  const [textureOverrides, setTextureOverrides] = useState<
+    Record<string, Partial<SwatchSettings>>
+  >({});
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  function handleCardClick(textureId: string, index: number) {
+    if (selectedTextureId === textureId) {
+      setSelectedTextureId(null);
+      setInsertAfterIndex(null);
+      return;
+    }
+
+    const clickedTop =
+      cardRefs.current[index]?.getBoundingClientRect().top ?? 0;
+    let lastInRow = index;
+    for (let i = index + 1; i < textures.length; i++) {
+      const top = cardRefs.current[i]?.getBoundingClientRect().top ?? -1;
+      if (Math.round(top) === Math.round(clickedTop)) lastInRow = i;
+      else break;
+    }
+
+    setSelectedTextureId(textureId);
+    setInsertAfterIndex(lastInRow);
+  }
+
+  const selectedTexture = textures.find((t) => t.id === selectedTextureId);
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+      <section className={styles.globalsEditorSection}>
+        <GlobalSettingsEditor
+          settings={globalSettings}
+          defaults={DEFAULTS}
+          onChange={setGlobalSettings}
+          onReset={() => setGlobalSettings(DEFAULTS)}
+        />
       </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
+      <section className={styles.gallerySection}>
+        {textures.map((t, i) => (
+          <Fragment key={i}>
+            <SwatchCard
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              texture={t}
+              isSelected={selectedTextureId === t.id}
+              hasOverrides={
+                !!(
+                  textureOverrides[t.id] &&
+                  Object.keys(textureOverrides[t.id]).length > 0
+                )
+              }
+              vars={{ ...globalSettings, ...textureOverrides[t.id] }}
+              onClick={() => handleCardClick(t.id, i)}
+            />
+            {insertAfterIndex === i && selectedTexture && (
+              <SwatchCardSettingsEditor
+                texture={selectedTexture}
+                globalSettings={globalSettings}
+                overrides={textureOverrides[selectedTexture.id] ?? {}}
+                onOverridesChange={(overrides) =>
+                  setTextureOverrides((prev) => ({
+                    ...prev,
+                    [selectedTexture.id]: overrides,
+                  }))
+                }
+                onClose={() => {
+                  setSelectedTextureId(null);
+                  setInsertAfterIndex(null);
+                }}
+              />
+            )}
+          </Fragment>
+        ))}
       </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

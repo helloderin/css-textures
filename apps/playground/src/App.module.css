@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+.globalsEditorSection {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 1.25rem;
+}
+.gallerySection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  padding: 16px;
+}
