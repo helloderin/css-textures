@@ -1,3 +1,5 @@
+name: "Package Build and Test"
+
 on:
   pull_request:
   push:
